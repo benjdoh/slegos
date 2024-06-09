@@ -1,8 +1,22 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
+import UnoCSS from 'unocss/vite';
+import {
+	transformerCompileClass,
+	transformerDirectives,
+	transformerVariantGroup,
+	presetIcons,
+	presetUno
+} from 'unocss';
 
 export default defineConfig({
-	plugins: [sveltekit()],
+	plugins: [
+		UnoCSS({
+			transformers: [transformerVariantGroup(), transformerDirectives(), transformerCompileClass()],
+			presets: [presetUno(), presetIcons()]
+		}),
+		sveltekit()
+	],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	}

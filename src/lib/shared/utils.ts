@@ -1,8 +1,8 @@
-import { is_client, get_current_component, onDestroy } from 'svelte/internal';
+import { onDestroy } from 'svelte';
+import { browser } from '$app/environment';
 
 export function tryOnDestroy(fn: () => void) {
 	try {
-		get_current_component();
 		onDestroy(fn);
 	} catch {
 		// fail silently
@@ -15,6 +15,6 @@ export function isSafeIntegerThrowable(int: unknown) {
 	}
 }
 
-export const isClient = is_client;
-export const defaultWindow = is_client ? window : undefined;
-export const defaultDocument = is_client ? window.document : undefined;
+export const isClient = browser;
+export const defaultWindow = browser ? window : undefined;
+export const defaultDocument = browser ? window.document : undefined;

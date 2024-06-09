@@ -4,7 +4,7 @@ import { unwrap, useSupported } from '$lib/index.js';
 import type { MaybeWriteableOrReadable } from '$lib/shared/types.js';
 import { defaultWindow } from '$lib/shared/utils.js';
 import { onDestroy } from 'svelte';
-import { readonly, writable } from 'svelte/store';
+import { derived, get, readonly, writable } from 'svelte/store';
 
 type ConfigurableWindow = {
 	window?: Window;
@@ -31,9 +31,8 @@ export function useMediaQuery(
 		// @ts-expect-error deprecated API
 		else mediaQuery.removeListener(handler);
 	};
-
-	$effect(() => {
-		if (!isSupported) return;
+	const support = (supported: boolean) => {
+		if (!supported) return;
 
 		cleanup();
 
@@ -45,7 +44,11 @@ export function useMediaQuery(
 		else mediaQuery.addListener(handler);
 
 		matches.set(mediaQuery.matches);
-	});
+	};
+
+	derived(isSupported, support);
+
+	support(get(isSupported));
 
 	onDestroy(() => {
 		cleanup();

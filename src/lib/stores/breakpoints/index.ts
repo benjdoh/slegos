@@ -21,7 +21,7 @@ type BreakpointsOptions = {
 
 export function useBreakpoints<K extends string>(
 	breakpoints: Breakpoints<K>,
-	options: BreakpointsOptions
+	options?: BreakpointsOptions
 ) {
 	function getValue(k: MaybeWriteableOrReadable<K>, delta?: number) {
 		let v = unwrap(breakpoints[unwrap(k)]);
@@ -33,7 +33,7 @@ export function useBreakpoints<K extends string>(
 		return v;
 	}
 
-	const { window = defaultWindow, strategy = 'min-width' } = options;
+	const { window = defaultWindow, strategy = 'min-width' } = options || {};
 
 	function match(query: string): boolean {
 		if (!window) return false;
