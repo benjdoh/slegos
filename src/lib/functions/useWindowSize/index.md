@@ -1,6 +1,6 @@
 ---
-title: Average
-description: Reactive average
+title: Window Size
+description: Reactive window size
 ---
 
 <script>

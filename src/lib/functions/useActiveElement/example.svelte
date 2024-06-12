@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { useActiveElement } from '$lib';
+	import { useActiveElement } from './index.js';
 
 	const active = useActiveElement();
 </script>

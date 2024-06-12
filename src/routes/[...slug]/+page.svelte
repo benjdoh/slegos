@@ -28,10 +28,10 @@
 </script>
 
 <header class="mb-12">
-	<p class="mb uppercase tracking-widest text-black/50 font-semibold">
+	<p class="mb-4 uppercase tracking-widest text-black/50 font-semibold">
 		{data.section}
 	</p>
-	<h1 class="text-5xl font-light <md:text-3xl">{data.meta.title}</h1>
+	<h1 class="text-6xl font-light <md:text-4xl">{data.meta.title}</h1>
 	<p class="mt-4 text-sm font-light text-neutral-400 dark:text-neutral-500 md:text-lg">
 		{data.meta.description}
 	</p>

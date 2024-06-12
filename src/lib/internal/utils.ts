@@ -1,16 +1,15 @@
 import { type ClassValue, clsx } from 'clsx';
-import type { SvelteComponent } from 'svelte';
 import { twMerge } from 'tailwind-merge';
+import { kebabCase as _kebab } from 'scule';
 
 export const cn = (...inputs: ClassValue[]) => {
 	return twMerge(clsx(inputs));
 };
 
-export function getContents() {
-	return Object.entries(
-		import.meta.glob<{
-			default: SvelteComponent;
-			metadata: Record<string, string>;
-		}>('/src/lib/**/demo.md')
-	);
+export function kebabCase(str: string) {
+	return _kebab(str.replace(/[-/\s]+/g, '-'));
+}
+
+export function kebabURL(str: string) {
+	return str.split('/').map(kebabCase).join('/');
 }

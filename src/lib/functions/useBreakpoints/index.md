@@ -1,6 +1,7 @@
 ---
 title: Breakpoints
-description: Reactive viewport breakpoints.
+description: Reactive viewport breakpoints
+section: Browser
 ---
 
 ## Example

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { useAverage } from '$lib';
+	import { useAverage } from '$lib/index.js';
 	import { onDestroy, onMount } from 'svelte';
 
 	let num = $state(3.14);

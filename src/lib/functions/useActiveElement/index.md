@@ -1,6 +1,7 @@
 ---
 title: Active Element
 description: Reactive window.activeElement
+section: Elements
 ---
 
 <script lang="ts">

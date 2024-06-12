@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn } from '$lib/internal/utils.js';
+	import { cn, kebabCase } from '$lib/internal/utils.js';
 	let { data, children } = $props();
 </script>
 
@@ -13,7 +13,7 @@
 
 			<ul class="flex flex-col gap-0.5">
 				{#each data.sections[section] as item}
-					{@const href = `${section}/${item.id}`}
+					{@const href = `${kebabCase(section)}/${kebabCase(item)}`}
 
 					<li class="relative">
 						<a
@@ -23,7 +23,7 @@
 								href === data.slug ? 'text-black font-medium' : ''
 							)}
 						>
-							{item.name}
+							{item}
 						</a>
 
 						{#if href === data.slug}

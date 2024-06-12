@@ -1,9 +1,14 @@
 <script lang="ts">
-	import Logo from '$lib/components/logo.svelte';
+	import Logo from '$lib/internal/components/logo.svelte';
 	import { cn } from '$lib/internal/utils.js';
 	import { Search, Menu } from 'lucide-svelte';
 	import { useBreakpoints, breakpointsTailwind } from '$lib/index.js';
 	import { derived } from 'svelte/store';
+	import { getContents } from '$lib/internal/index.js';
+
+	type Props = {
+		sections: Record<string, string[]>;
+	};
 
 	const links = [
 		{ name: 'Actions', href: '/actions' },
@@ -15,6 +20,7 @@
 	let isMenuOpen = $state(false);
 	const breakpoints = useBreakpoints(breakpointsTailwind);
 	const isLarge = breakpoints.greater('md');
+	const { sections }: Props = $props();
 
 	$effect(() => {
 		document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
@@ -34,7 +40,7 @@
 </div>
 
 <div
-	class={cn('fixed top-0 w-screen z-15 pointer-events-none flex flex-col justify-end')}
+	class={cn('fixed top-0 w-screen z-15 pointer-events-none flex flex-col justify-end md:hidden')}
 	style="height: calc(100dvh - 4rem)"
 >
 	<div

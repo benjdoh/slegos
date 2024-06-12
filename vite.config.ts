@@ -8,6 +8,7 @@ import {
 	presetIcons,
 	presetUno
 } from 'unocss';
+import mdx from '@mdx-js/rollup';
 
 export default defineConfig({
 	plugins: [
@@ -15,7 +16,8 @@ export default defineConfig({
 			transformers: [transformerVariantGroup(), transformerDirectives(), transformerCompileClass()],
 			presets: [presetUno(), presetIcons()]
 		}),
-		sveltekit()
+		sveltekit(),
+		mdx()
 	],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']

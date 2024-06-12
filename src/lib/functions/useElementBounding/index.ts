@@ -1,5 +1,5 @@
 import { readonly, writable } from 'svelte/store';
-import { useResizeObserver } from '../resizeObserver/index.js';
+import { useResizeObserver } from '../useResizeObserver/index.js';
 
 export function useElementBounding<T extends Element>(target: T) {
 	const store = writable<DOMRect>(target.getBoundingClientRect());
