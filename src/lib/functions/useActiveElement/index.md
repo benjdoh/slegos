@@ -1,5 +1,4 @@
 ---
-title: Active Element
 description: Reactive window.activeElement
 section: Elements
 ---

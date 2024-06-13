@@ -13,7 +13,7 @@
 
 			<ul class="flex flex-col gap-0.5">
 				{#each data.sections[section] as item}
-					{@const href = `${kebabCase(section)}/${kebabCase(item)}`}
+					{@const href = `${section.toLowerCase()}/${item.name}`}
 
 					<li class="relative">
 						<a
@@ -23,7 +23,7 @@
 								href === data.slug ? 'text-black font-medium' : ''
 							)}
 						>
-							{item}
+							{item.name}
 						</a>
 
 						{#if href === data.slug}

@@ -1,30 +1,40 @@
 import type { SvelteComponent } from 'svelte';
 
+type Metadatas = 'description' | 'section' | 'name';
+
 export function getContents() {
 	return Object.entries(
 		import.meta.glob<{
 			default: SvelteComponent;
-			metadata: Record<string, string>;
-		}>('/src/lib/**/index.md')
+			metadata: Record<Metadatas, string>;
+		}>('/src/lib/functions/**/index.md')
 	);
 }
 
-export const PATH_REGEX = /\/src\/lib|.md|\/index|\/demo/g;
+export const PATH_REGEX = /\/src\/lib\/functions\/|.md|\/index|\/demo/g;
+
+type GetContentSectionedItem = {
+	name: string;
+	description: string;
+	section: string;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	component: SvelteComponent<Record<string, any>, any, any>;
+};
+
+export type GetContentSectionedReturn = Record<string, Array<GetContentSectionedItem>>;
 
 export async function getContentSectioned() {
 	const pages = getContents();
 
-	const sections: Record<string, Array<string>> = {};
+	const sections: GetContentSectionedReturn = {};
 
 	for (const [path, resolver] of pages) {
-		const _path = path.replace(PATH_REGEX, '');
-		const section = _path.split('/')[1];
+		const { default: component, metadata } = await resolver();
 
-		if (!sections[section]) sections[section] = [];
+		if (!metadata.section) continue;
+		if (!sections[metadata.section]) sections[metadata.section] = [];
 
-		const component = await resolver();
-
-		sections[section].push(component.metadata.title);
+		sections[metadata.section].push({ ...metadata, name: path.replace(PATH_REGEX, ''), component });
 	}
 
 	return sections;

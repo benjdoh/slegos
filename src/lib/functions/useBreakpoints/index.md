@@ -1,5 +1,4 @@
 ---
-title: Breakpoints
 description: Reactive viewport breakpoints
 section: Browser
 ---

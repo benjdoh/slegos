@@ -12,7 +12,7 @@
 	};
 
 	const title = $derived(
-		$page.data?.meta?.title ? `${$page.data.meta.title} - ${config.name}` : config.name
+		$page.data?.meta?.name ? `${$page.data.meta.name} - ${config.name}` : config.name
 	);
 
 	let { data } = $props();
@@ -29,9 +29,9 @@
 
 <header class="mb-12">
 	<p class="mb-4 uppercase tracking-widest text-black/50 font-semibold">
-		{data.section}
+		{data.meta.section}
 	</p>
-	<h1 class="text-6xl font-light <md:text-4xl">{data.meta.title}</h1>
+	<h1 class="text-6xl font-light <md:text-4xl">{data.meta.name}</h1>
 	<p class="mt-4 text-sm font-light text-neutral-400 dark:text-neutral-500 md:text-lg">
 		{data.meta.description}
 	</p>

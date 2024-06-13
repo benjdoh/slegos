@@ -16,8 +16,7 @@ export default defineConfig({
 			transformers: [transformerVariantGroup(), transformerDirectives(), transformerCompileClass()],
 			presets: [presetUno(), presetIcons()]
 		}),
-		sveltekit(),
-		mdx()
+		sveltekit()
 	],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']

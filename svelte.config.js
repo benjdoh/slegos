@@ -21,7 +21,8 @@ const config = {
 		version: {
 			name: pkg.version
 		},
-	}
+	},
+	
 };
 
 export default config;

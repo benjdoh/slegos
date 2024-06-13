@@ -1,6 +1,6 @@
 ---
-title: Window Size
 description: Reactive window size
+section: Elements
 ---
 
 <script>
@@ -8,3 +8,5 @@ description: Reactive window size
 </script>
 
 <Example />
+
+hello

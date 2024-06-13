@@ -3,11 +3,10 @@
 	import { cn } from '$lib/internal/utils.js';
 	import { Search, Menu } from 'lucide-svelte';
 	import { useBreakpoints, breakpointsTailwind } from '$lib/index.js';
-	import { derived } from 'svelte/store';
-	import { getContents } from '$lib/internal/index.js';
+	import {  type GetContentSectionedReturn } from '$lib/internal/index.js';
 
 	type Props = {
-		sections: Record<string, string[]>;
+		sections: GetContentSectionedReturn;
 	};
 
 	const links = [

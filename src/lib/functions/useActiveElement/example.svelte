@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { useActiveElement } from './index.js';
+	// @ts-ignore
+	import { useActiveElement } from './';
 
 	const active = useActiveElement();
 </script>

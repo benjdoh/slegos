@@ -1,5 +1,6 @@
 <script>
-	import { useWindowSize } from './index.js';
+	// @ts-ignore
+	import { useWindowSize } from './';
 
 	const size = useWindowSize();
 </script>
