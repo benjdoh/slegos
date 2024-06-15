@@ -5,6 +5,7 @@
 	import { useBreakpoints, breakpointsTailwind } from '$lib/index.js';
 	import { type GetContentsItem } from '$lib/internal/index.js';
 	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 
 	type Props = {
 		pages: GetContentsItem[];
@@ -35,7 +36,9 @@
 </script>
 
 <div
-	class={cn('sticky top-0 w-screen bg-white h-16 border-b shadow-sm shadow-black/10 py-4 px-10')}
+	class={cn(
+		'sticky top-0 w-screen bg-white h-16 border-b shadow-sm shadow-black/10 py-4 px-10 max-w-screen <md:hidden'
+	)}
 >
 	<div class="flex h-full items-center gap-8">
 		<a
@@ -81,7 +84,12 @@
 
 			•
 
-			<a href="https//github.com/justboereh/slegos"> GH </a>
+			<a
+				href="https//github.com/justboereh/slegos"
+				onclick={() => goto('//github.com/justboereh.com')}
+			>
+				GH
+			</a>
 		</div>
 	</div>
 </div>
