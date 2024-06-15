@@ -2,7 +2,6 @@
 	import Logo from '$lib/internal/components/logo.svelte';
 	import { cn } from '$lib/internal/utils.js';
 	import { Search } from 'lucide-svelte';
-	import { SiGithub } from '@icons-pack/svelte-simple-icons';
 	import { useBreakpoints, breakpointsTailwind } from '$lib/index.js';
 	import { type GetContentsItem } from '$lib/internal/index.js';
 	import { page } from '$app/stores';
@@ -82,9 +81,7 @@
 
 			•
 
-			<a href="https//github.com/justboereh/slegos">
-				<SiGithub />
-			</a>
+			<a href="https//github.com/justboereh/slegos"> GH </a>
 		</div>
 	</div>
 </div>
