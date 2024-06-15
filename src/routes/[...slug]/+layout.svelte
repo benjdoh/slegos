@@ -1,18 +1,26 @@
 <script lang="ts">
 	import { cn, kebabCase } from '$lib/internal/utils.js';
 	let { data, children } = $props();
+
+	const sections: Record<string, Array<(typeof data.pages)[0]>> = {};
+
+	for (const page of data.pages) {
+		if (!sections[page.section]) sections[page.section] = [];
+
+		sections[page.section].push(page);
+	}
 </script>
 
 <nav
 	class="fixed left-0 top-16 p-10 w-68 pt-16 pr-0 flex flex-col gap-8 border-r bg-light-300 border-light-900 <md:hidden"
 	style="height: calc(100vh - 4rem); overflow-y-auto; overflow-x-hidden;"
 >
-	{#each Object.keys(data.sections) as section}
+	{#each Object.keys(sections) as section}
 		<div class="text-black/60 whitespace-nowrap w-58">
-			<h2 class="uppercase font-bold tracking-wide text-md mb-0.5">{section}</h2>
+			<h2 class="uppercase font-bold tracking-widest text-md mb-0.5">{section}</h2>
 
-			<ul class="flex flex-col gap-0.5">
-				{#each data.sections[section] as item}
+			<ul class="flex flex-col gap-0.5 font-light">
+				{#each sections[section] as item}
 					{@const href = `${section.toLowerCase()}/${item.name}`}
 
 					<li class="relative">

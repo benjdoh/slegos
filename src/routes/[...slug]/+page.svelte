@@ -19,22 +19,13 @@
 
 	type Component = $$Generic<typeof SvelteComponent<any, any, any>>;
 	const component = $derived(data.component) as unknown as Component;
-
-	onMount(() => {
-		for (const element of document.querySelectorAll('.shiki-wrapper')) {
-			console.log(element);
-		}
-	});
 </script>
 
-<header class="mb-12">
+<header class="<md:mb-12">
 	<p class="mb-4 uppercase tracking-widest text-black/50 font-semibold">
-		{data.meta.section}
+		{data.section}
 	</p>
-	<h1 class="text-6xl font-light <md:text-4xl">{data.meta.name}</h1>
-	<p class="mt-4 text-sm font-light text-neutral-400 dark:text-neutral-500 md:text-lg">
-		{data.meta.description}
-	</p>
+	<h1 class="text-6xl font-light <md:text-4xl">{data.name}</h1>
 </header>
 
 <section

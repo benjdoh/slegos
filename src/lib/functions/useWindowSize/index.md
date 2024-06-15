@@ -1,7 +1,8 @@
 ---
-description: Reactive window size
 section: Elements
 ---
+
+Reactive window size
 
 <script>
   import Example from './example.svelte'

@@ -1,13 +1,16 @@
 <script lang="ts">
 	import '@unocss/reset/tailwind.css';
 	import 'virtual:uno.css';
-	import Navigation from './navigation.svelte';
+	import Topnav from '$lib/internal/components/top nav.svelte';
+	import Bottomnav from '../lib/internal/components/bottom nav.svelte';
 	const { children, data } = $props();
 </script>
 
+<Topnav pages={data.pages} />
+
 {@render children()}
 
-<Navigation sections={data.sections} />
+<Bottomnav pages={data.pages} />
 
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap');
@@ -27,8 +30,8 @@
 			'Helvetica Neue',
 			sans-serif;
 		font-optical-sizing: auto;
-		font-weight: 500;
+		font-weight: 400;
 		font-style: normal;
-		@apply <md:mb-16;
+		@apply <md:mb-16 text-dark-100;
 	}
 </style>

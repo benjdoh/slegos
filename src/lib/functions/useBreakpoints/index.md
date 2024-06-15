@@ -1,7 +1,8 @@
 ---
-description: Reactive viewport breakpoints
 section: Browser
 ---
+
+Reactive viewport breakpoints
 
 ## Example
 
