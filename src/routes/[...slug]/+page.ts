@@ -3,19 +3,33 @@ import { getContents } from '$lib/internal/index.js';
 
 export async function load({ params: { slug } }) {
 	const pages = await getContents();
-	let match: (typeof pages)[0] | null = null;
 
-	for await (const page of pages) {
-		const path = `/${page.section.toLowerCase()}/${page.name}`;
+	if (slug.includes('/')) {
+		let matched: (typeof pages)[0] | null = null;
 
-		if (path === `/${slug}`) {
-			match = page;
+		for await (const page of pages) {
+			const path = `/${page.section.toLowerCase()}/${page.name}`;
 
-			break;
+			if (path === `/${slug}`) {
+				matched = page;
+
+				break;
+			}
 		}
+
+		if (!matched) error(404, 'Page not found');
+
+		return matched;
 	}
 
-	if (!match) error(404, 'Page not found');
+	const matches: string[] = [];
 
-	return match;
+	for await (const page of pages) {
+		if (page.section.toLowerCase() !== slug) continue;
+
+		matches.push(page.name);
+	}
+
+	if (!matches) error(404, 'Section not found');
+	return { sections: matches };
 }

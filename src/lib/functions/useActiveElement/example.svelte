@@ -5,10 +5,12 @@
 	const active = useActiveElement();
 </script>
 
-<input type="text" id="first" />
-<input type="text" id="second" />
-<input type="text" id="third" />
-<input type="text" id="fourth" />
+<Demo>
+	<input type="text" id="first" />
+	<input type="text" id="second" />
+	<input type="text" id="third" />
+	<input type="text" id="fourth" />
+</Demo>
 
 {#if active}
 	{$active?.id}

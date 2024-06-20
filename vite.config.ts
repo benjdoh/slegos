@@ -8,10 +8,14 @@ import {
 	presetIcons,
 	presetUno
 } from 'unocss';
-import mdx from '@mdx-js/rollup';
+// @ts-expect-error no types
+import autoImport from 'sveltekit-autoimport';
 
 export default defineConfig({
 	plugins: [
+		autoImport({
+			components: ['./src/lib/components']
+		}),
 		UnoCSS({
 			transformers: [transformerVariantGroup(), transformerDirectives(), transformerCompileClass()],
 			presets: [presetUno(), presetIcons()]

@@ -1,4 +1,5 @@
 export * from './onClickOutside/index.js';
+export * from './useAverage/index.svelte.js';
 export * from './useBreakpoints/index.js';
 export * from './useCSSVar/index.js';
 export * from './useMediaQuery/index.js';

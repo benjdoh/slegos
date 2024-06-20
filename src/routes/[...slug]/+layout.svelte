@@ -11,8 +11,12 @@
 	}
 </script>
 
-<nav
-	class="fixed left-0 top-16 p-10 w-68 pt-16 pr-0 flex flex-col gap-8 border-r bg-light-300 border-light-900 <md:hidden"
+<div
+	class={cn(
+		'fixed left-0 top-16 flex flex-col gap-8 border-r bg-light-300 border-light-900 pr-0',
+		'p-10 pt-16 <md:hidden',
+		'lg:(pl-29 w-90)'
+	)}
 	style="height: calc(100vh - 4rem); overflow-y-auto; overflow-x-hidden;"
 >
 	{#each Object.keys(sections) as section}
@@ -44,10 +48,10 @@
 			</ul>
 		</div>
 	{/each}
-</nav>
+</div>
 
 <article
-	class="flex-grow p-10 pt-16 mt-16 <md:(p-8 mt-0) md:(ml-68) overflow-y-auto overflow-x-hidden"
+	class="flex-grow p-10 pt-16 <md:(p-8) md:(pl-104) overflow-y-auto overflow-x-hidden space-y-4"
 >
 	{@render children()}
 </article>

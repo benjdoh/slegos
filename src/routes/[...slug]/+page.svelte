@@ -2,6 +2,8 @@
 	import { cn } from '$lib/internal/utils.js';
 	import { type SvelteComponent, onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import Content from './content.svelte';
+	import List from './list.svelte';
 
 	const config = {
 		name: 'Slegos',
@@ -11,52 +13,14 @@
 		keywords: `Svelte,Svelte 5,SvelteKit,Svelte Runes,Svelte Utils,Slegos,Svelte Legos,`
 	};
 
-	const title = $derived(
-		$page.data?.meta?.name ? `${$page.data.meta.name} - ${config.name}` : config.name
-	);
-
 	let { data } = $props();
-
-	type Component = $$Generic<typeof SvelteComponent<any, any, any>>;
-	const component = $derived(data.component) as unknown as Component;
 </script>
 
-<header class="<md:mb-12">
-	<p class="mb-4 uppercase tracking-widest text-black/50 font-semibold">
-		{data.section}
-	</p>
-	<h1 class="text-6xl font-light <md:text-4xl">{data.name}</h1>
-</header>
-
-<section
-	class={cn(
-		'prose max-w-full dark:prose-invert',
-		'prose-blockquote:text-neutral-500 dark:prose-blockquote:border-neutral-600 dark:prose-blockquote:text-neutral-500',
-		'prose-headings:tracking-wide prose-h3:text-lg',
-		'prose-tr:grid prose-tr:grid-cols-[.4fr,.6fr,1fr] prose-tr:py-3',
-		'dark:prose-thead:border-white/15 dark:prose-tr:border-white/10',
-		'prose-teal',
-		'flex flex-col gap-4'
-	)}
->
-	<svelte:component this={component} />
-</section>
-
-<svelte:head>
-	<title>{title}</title>
-	<meta name="description" content={config.description} />
-	<meta name="keywords" content={config.keywords} />
-	<meta name="author" content={config.author} />
-	<meta name="twitter:site" content={config.url} />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={config.description} />
-	<meta name="twitter:creator" content={config.author} />
-	<meta property="og:title" content={title} />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content={config.url + $page.url.pathname} />
-	<meta property="og:description" content={config.description} />
-	<meta property="og:site_name" content={config.name} />
-</svelte:head>
+{#if 'sections' in data}
+	<List sections={data.sections || []} />
+{:else}
+	<Content {...data} {config} />
+{/if}
 
 <style>
 	:global(.shiki-wrapper) {
