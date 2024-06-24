@@ -2,20 +2,17 @@
 	import { onMount } from 'svelte';
 
 	// @ts-ignore
-	import { useAverage } from './index.js';
+	import { createAverage } from './index.svelte.js';
 
 	let num = $state(3.14);
-	const result = $derived(useAverage(num));
+	const { value: average, useAverage } = createAverage();
 
-	console.log(num);
+	$effect(() => useAverage(num));
+
 	onMount(() => {
 		setInterval(() => (num = num + 0.1), 1000);
-		console.log(result);
-	});
-
-	$effect(() => {
-		console.log(result);
 	});
 </script>
 
-{result}
+{num}
+{average}

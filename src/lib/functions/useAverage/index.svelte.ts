@@ -1,15 +1,18 @@
-import { get, readable, type Writable } from 'svelte/store';
+export type CreateAverageOptions = {
+	default?: number;
+};
 
-const history = $state<number[]>([]);
+export function createAverage() {
+	const history = $state<number[]>([]);
 
-export function useAverage(num: Writable<number>) {
-	num.subscribe((v) => {
-		history.push(v);
-	});
+	return {
+		useAverage(num: number) {
+			history.push(num);
+		},
+		get value() {
+			if (history.length < 1) return null;
 
-	readable(() => {
-		return history.reduce((p, v) => p + v) / history.length;
-	});
-
-	return;
+			return history.reduce((p, v) => p + v) / history.length;
+		}
+	};
 }

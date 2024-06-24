@@ -73,9 +73,7 @@
 					href={`/${section.toLowerCase()}`}
 					class={cn(
 						'hover:underline underline-offset-4 transition duration-200',
-						$page.url.pathname.startsWith(`/${section.toLowerCase()}`)
-							? 'text-orange underline'
-							: ''
+						$page.url.pathname.startsWith(`/${section.toLowerCase()}`) ? 'text-brand underline' : ''
 					)}
 				>
 					{section}

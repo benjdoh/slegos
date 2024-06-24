@@ -17,6 +17,11 @@ export default defineConfig({
 			components: ['./src/lib/components']
 		}),
 		UnoCSS({
+			theme: {
+				colors: {
+					brand: '#d43008'
+				}
+			},
 			transformers: [transformerVariantGroup(), transformerDirectives(), transformerCompileClass()],
 			presets: [presetUno(), presetIcons()]
 		}),
