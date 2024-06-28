@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { useDebounceFn } from './indext.js';
+	import { useDebounceFn } from './index.js';
 
 	let clicked = $state(0);
 	let handlerCalled = $state(0);

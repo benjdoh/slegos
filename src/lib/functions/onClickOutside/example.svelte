@@ -1,6 +1,6 @@
 <script lang="ts">
 	// @ts-ignore
-	import { onClickOutside } from './';
+	import { onClickOutside } from './index.js';
 
 	function clickedOutside() {
 		console.log('clicked');

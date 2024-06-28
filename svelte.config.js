@@ -16,13 +16,11 @@ const config = {
 	preprocess: [vitePreprocess(), mdsvex(mdsvexConfig)],
 
 	kit: {
-
 		adapter: adapter(),
 		version: {
 			name: pkg.version
-		},
-	},
-	
+		}
+	}
 };
 
 export default config;

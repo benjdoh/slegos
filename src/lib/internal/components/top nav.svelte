@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Logo from '$lib/internal/components/logo.svelte';
 	import { cn } from '$lib/internal/utils.js';
-	import { Search } from 'lucide-svelte';
+	import { Search, Github } from 'lucide-svelte';
 	import { useBreakpoints, breakpointsTailwind } from '$lib/index.js';
 	import { type GetContentsItem } from '$lib/internal/index.js';
 	import { page } from '$app/stores';
@@ -86,7 +86,7 @@
 				href="https//github.com/justboereh/slegos"
 				onclick={() => goto('//github.com/justboereh.com')}
 			>
-				GH
+				<Github />
 			</a>
 		</div>
 	</div>

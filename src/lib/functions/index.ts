@@ -9,4 +9,6 @@ export * from './useElementBounding/index.js';
 export * from './useElementVisibility/index.js';
 export * from './useResizeObserver/index.js';
 export * from './useWindowSize/index.js';
-export * from './useDebounceFn/indext.js';
+export * from './useDebounceFn/index.js';
+export * from './onMultiClick/index.js';
+export * from './onDoubleClick/index.js';

@@ -19,6 +19,8 @@ export async function load({ params: { slug } }) {
 
 		if (!matched) error(404, 'Page not found');
 
+		console.log(JSON.stringify(matched));
+
 		return matched;
 	}
 
@@ -30,6 +32,7 @@ export async function load({ params: { slug } }) {
 		matches.push(page.name);
 	}
 
+	console.log(JSON.stringify(matches));
 	if (!matches) error(404, 'Section not found');
 	return { sections: matches };
 }

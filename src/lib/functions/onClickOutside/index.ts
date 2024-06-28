@@ -1,6 +1,4 @@
-import type { ActionReturn } from 'svelte/action';
-
-export function onClickOutside(node: HTMLElement, func: (e: MouseEvent) => void): ActionReturn {
+export function onClickOutside(node: HTMLElement, func: (e: MouseEvent) => void) {
 	function handler(event: MouseEvent) {
 		if (event.target !== null && !node.contains(event.target as Node)) {
 			func(event);
