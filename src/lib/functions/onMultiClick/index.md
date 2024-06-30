@@ -1,5 +1,5 @@
 ---
-section: Sensors
+section: Utilities
 ---
 
 Listen for mutliple clicks on HTML Element

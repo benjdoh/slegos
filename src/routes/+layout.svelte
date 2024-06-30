@@ -32,6 +32,6 @@
 		font-optical-sizing: auto;
 		font-weight: 400;
 		font-style: normal;
-		@apply <md:mb-16 text-dark-100;
+		@apply <md:mb-16 text-dark-50;
 	}
 </style>
