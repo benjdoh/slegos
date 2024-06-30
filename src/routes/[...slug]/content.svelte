@@ -25,7 +25,7 @@
 	<p class="mb-4 uppercase tracking-widest text-black/50 font-semibold">
 		{section}
 	</p>
-	<h1 class="text-6xl font-light <md:text-4xl">{name}</h1>
+	<h1 class="md:text-6xl font-light text-4xl">{name}</h1>
 </header>
 
 <section

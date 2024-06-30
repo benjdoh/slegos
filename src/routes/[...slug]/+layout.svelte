@@ -51,7 +51,7 @@
 </div>
 
 <article
-	class="flex-grow p-10 pt-16 <md:(p-8) md:(pl-104) overflow-y-auto overflow-x-hidden space-y-4"
+	class="flex-grow p-8 pt-16 md:(p-10) md:(pl-104) overflow-y-auto overflow-x-hidden space-y-4"
 >
 	{@render children()}
 </article>
