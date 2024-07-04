@@ -16,7 +16,7 @@ Reactive viewport breakpoints
 
 ```svelte
 <script>
-	import { useBreakpoints, breakpointsTailwind } from 'slegos';
+	import { useBreakpoints, breakpointsTailwind } from 'svegos';
 
 	const breakpoints = useBreakpoints(breakpointsTailwind);
 
@@ -29,7 +29,7 @@ Reactive viewport breakpoints
 
 ```svelte
 <script>
-	import { useBreakpoints } from 'slegos';
+	import { useBreakpoints } from 'svegos';
 
 	const breakpoints = useBreakpoints({
 		mobile: 0, // optional

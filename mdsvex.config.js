@@ -1,14 +1,14 @@
 import { defineMDSveXConfig as defineConfig, escapeSvelte } from 'mdsvex';
 import slug from 'rehype-slug';
 import externalLinks from 'remark-external-links';
-import { getHighlighter } from 'shiki';
+import { getSingletonHighlighter } from 'shiki';
 
 const config = defineConfig({
 	extensions: ['.md'],
 
 	highlight: {
 		highlighter: async (code, lang) => {
-			const highlighter = await getHighlighter({
+			const highlighter = await getSingletonHighlighter({
 				themes: ['catppuccin-frappe', 'catppuccin-latte'],
 				langs: ['svelte']
 			});
@@ -21,8 +21,9 @@ const config = defineConfig({
 			);
 			return `<div class="shiki-wrapper">{@html  \`${html}\`}<div copy-code="${escapeSvelte(code)}"></div></div>`;
 		}
-
 	},
+
+	layout: './src/lib/internal/mdsvex/layout.svelte',
 
 	smartypants: {
 		dashes: 'oldschool'

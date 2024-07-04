@@ -4,6 +4,8 @@ section: Utilities
 
 Listen for double clicks on HTML Element
 
+## Demo
+
 <script>
 	import Example from './example.svelte';
 
@@ -11,11 +13,11 @@ Listen for double clicks on HTML Element
 
 <Example />
 
-Usage
+## Usage
 
 ```svelte
 <script>
-	import { onDoubleClick } from './index.js';
+	import { onDoubleClick } from 'svegos';
 
 	let counter = $state(0);
 </script>

@@ -15,7 +15,7 @@ Usage
 
 ```svelte
 <script>
-	import { onMultiClick } from './index.js';
+	import { onMultiClick } from 'svegos';
 
 	let counter = $state(0);
 </script>

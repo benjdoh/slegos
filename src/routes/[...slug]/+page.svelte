@@ -6,11 +6,11 @@
 	import List from './list.svelte';
 
 	const config = {
-		name: 'Slegos',
+		name: 'Svegos',
 		description: 'Collection of essential Svelte Composition Utilities',
-		url: 'https://slegos.dev',
+		url: 'https://svegos.dev',
 		author: 'justboereh',
-		keywords: `Svelte,Svelte 5,SvelteKit,Svelte Runes,Svelte Utils,Slegos,Svelte Legos,`
+		keywords: `Svelte,Svelte 5,SvelteKit,Svelte Runes,Svelte Utils,svegos,Svelte Legos,`
 	};
 
 	let { data } = $props();

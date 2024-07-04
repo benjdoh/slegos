@@ -2,23 +2,33 @@
 	import Logo from '$lib/internal/components/logo.svelte';
 	import { cn } from '$lib/internal/utils.js';
 	import { Search, Menu, ChevronRight, ChevronLeft } from 'lucide-svelte';
-	import { useBreakpoints, breakpointsTailwind } from '$lib/index.js';
+	import { useBreakpoints, breakpointsTailwind, type Size, createTransition } from '$lib/index.js';
 	import { type GetContentsItem } from '$lib/internal/index.js';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { slide } from 'svelte/transition';
+	import { createElementSize } from '$lib/functions/useElementSize/index.js';
+	import { quintInOut } from 'svelte/easing';
 
 	type Props = {
 		pages: GetContentsItem[];
 	};
 
-	let isMenuOpen = $state(false);
-	let sectionName = $state('');
-	let menuBGTranslateY = $state('0px');
-	let mainMenuElem = $state<HTMLDivElement>();
-	let sectionMenuElem = $state<HTMLDivElement>();
+	const { pages }: Props = $props();
 	const breakpoints = useBreakpoints(breakpointsTailwind);
 	const isLarge = breakpoints.greater('md');
-	const { pages }: Props = $props();
+
+	let isMenuOpen = $state(false);
+	let sectionName = $state('');
+	let mainMenuElem = $state<HTMLDivElement>();
+	let sectionMenuElem = $state<HTMLDivElement>();
+	let contentElem = $state<HTMLDivElement>();
+	let menuBGTranslateY = $state('0%');
+	const { value: contentSize, useElementSize } = createElementSize();
+	const { value: transitionedContentSize, useTransition } = createTransition({ duration: 200 });
+
+	$effect(() => useElementSize(contentElem));
+	$effect(() => useTransition($contentSize.height));
 	const sections = $derived.by(() => {
 		const result: Record<string, GetContentsItem[]> = {};
 
@@ -32,28 +42,13 @@
 	});
 
 	$effect(() => {
-		if ($page.url.pathname === '/') {
-			sectionName = '';
-			return;
-		}
-
-		sectionName = $page.url.pathname.split('/')[1];
+		sectionName = $page.url.pathname === '/' ? '' : $page.url.pathname.split('/')[1];
 	});
 
 	$effect(() => {
 		document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
 
 		if ($isLarge) isMenuOpen = false;
-	});
-
-	$effect(() => {
-		if (!isMenuOpen) {
-			menuBGTranslateY = '0%';
-		} else if (sectionName !== '') {
-			menuBGTranslateY = sectionMenuElem?.clientHeight + 'px - 1.5rem';
-		} else {
-			menuBGTranslateY = mainMenuElem?.clientHeight + 'px - 1.5rem';
-		}
 	});
 </script>
 
@@ -68,59 +63,77 @@
 </div>
 
 <div
-	class={cn('fixed top-0 w-screen z-15 pointer-events-none flex flex-col justify-end md:hidden')}
+	class={cn(
+		'fixed top-0 w-screen z-15 pointer-events-none flex flex-col justify-end md:hidden overflow-hidden'
+	)}
 	style="height: calc(100dvh - 4rem)"
 >
+	<!-- <div
+		class={cn(
+			'w-full bg-red transform transition-all ease-in-out bottom-0 left-0 border border-b-0 border-light-900 h-full absolute block rounded-t-xl'
+		)}
+		style:--un-translate-y={`calc(100% - ${!isMenuOpen ? '0%' : (sectionName !== '' ? sectionMenuElem?.clientHeight : mainMenuElem?.clientHeight) + 'px'})`}
+	></div> -->
+
 	<div
 		class={cn(
-			'w-full bg-white transform transition-all ease-in-out border border-b-0 border-light-900 h-full absolute block rounded-t-xl'
+			'w-full bg-red transform transition-all ease-in-out bottom-0 left-0 border border-b-0 border-light-900 h-full absolute block rounded-t-xl'
 		)}
-		style:--un-translate-y={`calc(100% - ${menuBGTranslateY})`}
+		style:height={`calc(${$contentSize.height}px + 1.5rem)`}
 	></div>
 
 	<div
+		bind:this={contentElem}
 		class={cn(
-			'transform transition pointer-events-auto flex w-200% items-end max-h-3/4',
-			sectionName !== '' ? '-translate-x-1/2' : '',
+			'transform transition pointer-events-auto flex w-full items-end max-h-3/4 pt-4',
 			isMenuOpen ? '' : 'translate-y-full'
 		)}
 	>
-		<div bind:this={mainMenuElem} class={cn('w-full max-h-full h-fit rounded-t-2xl space-y-4')}>
-			{#each Object.keys(sections) as section}
-				<div class="flex items-center px-4">
-					<a href={`/${section}`} class="capitalize flex-grow">
-						{section}
-					</a>
+		{#if !sectionName}
+			<div
+				bind:this={mainMenuElem}
+				class={cn('w-full max-h-full h-fit space-y-4')}
+				transition:slide={{ duration: 2000, easing: quintInOut, axis: 'x' }}
+			>
+				{#each Object.keys(sections) as section}
+					<div class="flex items-center px-4">
+						<a href={`/${section}`} class="capitalize flex-grow">
+							{section}
+						</a>
 
-					<button class="w-8 flex justify-center" onclick={() => (sectionName = section)}>
-						<ChevronRight size={16} />
-					</button>
-				</div>
-			{/each}
-		</div>
-
-		<div bind:this={sectionMenuElem} class={cn('w-full max-h-full flex flex-col')}>
-			<div class="sticky px-4 uppercase font-medium tracking-wide">
-				{sectionName}
-			</div>
-
-			<div class="overflow-auto flex-grow p-4 pr-0 flex flex-col gap-4 pl-6">
-				{#each sections[sectionName] || [] as page}
-					<a href={`/${sectionName}/${page.name}`}>
-						{page.name}
-					</a>
+						<button class="w-8 flex justify-center" onclick={() => (sectionName = section)}>
+							<ChevronRight size={16} />
+						</button>
+					</div>
 				{/each}
 			</div>
-
-			<button
-				class="flex gap-2 items-center px-4 border-t border-light-900 min-h-12"
-				onclick={() => (sectionName = '')}
+		{:else}
+			<div
+				bind:this={sectionMenuElem}
+				class={cn('w-full max-h-full flex flex-col')}
+				transition:slide={{ duration: 2000, easing: quintInOut, axis: 'x' }}
 			>
-				<ChevronLeft size={16} />
+				<div class="sticky px-4 uppercase font-medium tracking-wide">
+					{sectionName}
+				</div>
 
-				Back
-			</button>
-		</div>
+				<div class="overflow-auto flex-grow p-4 pr-0 flex flex-col gap-4 pl-6">
+					{#each sections[sectionName] || [] as page}
+						<a href={`/${sectionName}/${page.name}`}>
+							{page.name}
+						</a>
+					{/each}
+				</div>
+
+				<button
+					class="flex gap-2 items-center px-4 border-t border-light-900 min-h-12"
+					onclick={() => (sectionName = '')}
+				>
+					<ChevronLeft size={16} />
+
+					Back
+				</button>
+			</div>{/if}
 	</div>
 </div>
 
@@ -137,17 +150,17 @@
 		>
 			<Logo class="h-full" />
 
-			<span class="">SLEGOS</span>
+			<span class="">SVEGOS</span>
 		</a>
 
 		<span class="flex-grow"> </span>
 
 		<button>
-			<Search />
+			<Search size={16} />
 		</button>
 
 		<button onclick={() => (isMenuOpen = !isMenuOpen)}>
-			<Menu />
+			<Menu size={16} />
 		</button>
 	</div>
 </div>

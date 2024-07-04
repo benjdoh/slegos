@@ -37,7 +37,7 @@
 
 <div
 	class={cn(
-		'sticky top-0 w-screen bg-white h-16 border-b shadow-sm shadow-black/10 py-4 px-10 max-w-screen <md:hidden'
+		'sticky top-0 w-screen bg-white h-16 border-b shadow-sm shadow-black/10 py-4 px-10 max-w-screen <md:hidden z-100'
 	)}
 >
 	<div class="flex h-full items-center gap-8">
@@ -47,7 +47,7 @@
 		>
 			<Logo class="h-full" />
 
-			<span class="">SLEGOS</span>
+			<span class="">SVEGOS</span>
 		</a>
 
 		<span class="flex-grow flex justify-end">
@@ -83,7 +83,8 @@
 			•
 
 			<a
-				href="https//github.com/justboereh/slegos"
+				rel="external"
+				href="https://github.com/justboereh/svegos"
 				onclick={() => goto('//github.com/justboereh.com')}
 			>
 				<Github />

@@ -1,4 +1,4 @@
-import { readonly, writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 import { useResizeObserver, type Size } from '$lib/index.js';
 
 /**
@@ -8,17 +8,22 @@ import { useResizeObserver, type Size } from '$lib/index.js';
  * @param callback
  * @param options
  */
-export function useElementSize<T extends Element | null>(target: T) {
-	const size = writable<Size>({ width: 0, height: 0 });
+export function createElementSize() {
+	const value = writable<Size>({ width: 0, height: 0 });
 
-	if (target !== null) {
-		useResizeObserver(target).subscribe(([entry]) => {
-			size.set({
-				width: entry.contentRect.width,
-				height: entry.contentRect.height
+	return {
+		value,
+		useElementSize<T extends HTMLElement | null | undefined>(target: T) {
+			if (!target) return;
+
+			useResizeObserver(target).subscribe(([entry]) => {
+				if (!entry) return;
+
+				value.set({
+					width: entry.contentRect.width,
+					height: entry.contentRect.height
+				});
 			});
-		});
-	}
-
-	return readonly(size);
+		}
+	};
 }

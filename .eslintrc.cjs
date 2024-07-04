@@ -26,6 +26,12 @@ module.exports = {
 			parserOptions: {
 				parser: '@typescript-eslint/parser'
 			}
+		},
+		{
+			files: ['*.ts', '*.svelte'],
+			rules: {
+				'@typescript-eslint/no-explicit-any': 'off'
+			}
 		}
 	]
 };

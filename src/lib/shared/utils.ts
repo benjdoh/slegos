@@ -15,6 +15,10 @@ export function isSafeIntegerThrowable(int: unknown) {
 	}
 }
 
+export function promiseTimeout(ms: number) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export const isClient = browser;
 export const defaultWindow = browser ? window : undefined;
 export const defaultDocument = browser ? window.document : undefined;
